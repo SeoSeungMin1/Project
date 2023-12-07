@@ -10,22 +10,22 @@
 #define TRUE 1
 
 enum {
-	BLACK,
-	DARK_BLUE,
-	DARK_GREEN,
-	DARK_SKYBLUE,
-	DARK_RED,
-	DARK_VIOLET,
-	DARK_YELLOW,
-	GRAY,
-	DARK_GRAY,
-	BLUE,
-	GREEN,
-	SKYBLUE,
-	RED,
-	VIOLET,
-	YELLOW,
-	WHITE,
+    BLACK,
+    DARK_BLUE,
+    DARK_GREEN,
+    DARK_SKYBLUE,
+    DARK_RED,
+    DARK_VIOLET,
+    DARK_YELLOW,
+    GRAY,
+    DARK_GRAY,
+    BLUE,
+    GREEN,
+    SKYBLUE,
+    RED,
+    VIOLET,
+    YELLOW,
+    WHITE,
 };
 
 void SetConsoleView();
@@ -39,90 +39,91 @@ void DrawTree(int treeX);
 void DrawGameOver(const int score);
 void DrawBird(int birdX);
 
+
 void SetConsoleView() {
-	system("mode con : cols=100 lines=25");
-	system("title 구글 공룡 게임 [By. SSM]");
-	CursorView(FALSE);
+    system("mode con : cols=120 lines=120");
+    system("title 구글 공룡 게임 [By. SSM]");
+    CursorView(FALSE);
 }
 
 void CursorView(char show) {
-	CONSOLE_CURSOR_INFO ConsoleCursor;
-	ConsoleCursor.bVisible = show;
-	ConsoleCursor.dwSize = 1;
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &ConsoleCursor);
+    CONSOLE_CURSOR_INFO ConsoleCursor;
+    ConsoleCursor.bVisible = show;
+    ConsoleCursor.dwSize = 1;
+    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &ConsoleCursor);
 }
 
 void SetColor(unsigned short text) {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), text);
 }
 
 void GotoXY(int x, int y) {
-	COORD Pos;
-	Pos.X = 2 * x;
-	Pos.Y = y;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+    COORD Pos;
+    Pos.X = 2 * x;
+    Pos.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
 
 int GetKeyDown() {
-	if (_kbhit() != 0) return _getch();
-	return FALSE;
+    if (_kbhit() != 0) return _getch();
+    return FALSE;
 }
 int IsCollision(const int treeX, const int dinoY) {
-	GotoXY(0, 0);
-	printf("treeX : %d, dinoY : %d", treeX, dinoY);
-	if (treeX <= 8 && treeX >= 4 && dinoY > 8) return TRUE;
+    GotoXY(0, 0);
+    printf("treeX : %d, dinoY : %d", treeX, dinoY);
+    if (treeX <= 8 && treeX >= 4 && dinoY > 8) return TRUE;
 
-	return FALSE;
+    return FALSE;
 }
 
 void DrawDino(int dinoY) {
-	SetColor(BLUE);
-	GotoXY(0, dinoY);
-	static int legFlag = TRUE;
-	printf("        $$$$$$$ \n");
-	printf("       $$ $$$$$$\n");
-	printf("       $$$$$$$$$\n");
-	printf("$      $$$      \n");
-	printf("$$     $$$$$$$  \n");
-	printf("$$$   $$$$$     \n");
-	printf(" $$  $$$$$$$$$$ \n");
-	printf("$$\n");
-	SetColor(WHITE);
-	printf("$$$");
-	SetColor(BLUE);
-	printf("$$$     \n");
-	printf("  $$$");
-	SetColor(GREEN);
-	printf("$$$");
-	SetColor(BLUE);
-	printf("$    \n");
-	printf("    $$$$$$$$    \n");
-	printf("     $$         ");
-	if (legFlag) {
-		printf("     $    $$$   \n");
-		printf("     $$         ");
-		legFlag = FALSE;
-	}
-	else {
-		printf("     $$$  $     \n");
-		printf("          $$    ");
-		legFlag = TRUE;
-	}
+    SetColor(BLUE);
+    GotoXY(0, dinoY);
+    static int legFlag = TRUE;
+    printf("        $$$$$$$ \n");
+    printf("       $$ $$$$$$\n");
+    printf("       $$$$$$$$$\n");
+    printf("$      $$$      \n");
+    printf("$$     $$$$$$$  \n");
+    printf("$$$   $$$$$     \n");
+    printf(" $$  $$$$$$$$$$ \n");
+    printf("$$\n");
+    SetColor(WHITE);
+    printf("$$$");
+    SetColor(BLUE);
+    printf("$$$     \n");
+    printf("  $$$");
+    SetColor(GREEN);
+    printf("$$$");
+    SetColor(BLUE);
+    printf("$    \n");
+    printf("    $$$$$$$$    \n");
+    printf("     $$         ");
+    if (legFlag) {
+        printf("     $    $$$   \n");
+        printf("     $$         ");
+        legFlag = FALSE;
+    }
+    else {
+        printf("     $$$  $     \n");
+        printf("          $$    ");
+        legFlag = TRUE;
+    }
 }
 
 void DrawTree(int treeX) {
-	SetColor(GREEN);
-	GotoXY(treeX, TREE_BOTTOM_Y);
-	printf("$$$$");
-	GotoXY(treeX, TREE_BOTTOM_Y + 1);
-	printf("$$$$");
-	GotoXY(treeX, TREE_BOTTOM_Y + 2);
-	printf("$$$$");
-	SetColor(DARK_YELLOW);
-	GotoXY(treeX, TREE_BOTTOM_Y + 3);
-	printf("$$$$");
-	GotoXY(treeX, TREE_BOTTOM_Y + 4);
-	printf("$$$$");
+    SetColor(GREEN);
+    GotoXY(treeX, TREE_BOTTOM_Y);
+    printf("$$$$");
+    GotoXY(treeX, TREE_BOTTOM_Y + 1);
+    printf("$$$$");
+    GotoXY(treeX, TREE_BOTTOM_Y + 2);
+    printf("$$$$");
+    SetColor(DARK_YELLOW);
+    GotoXY(treeX, TREE_BOTTOM_Y + 3);
+    printf("$$$$");
+    GotoXY(treeX, TREE_BOTTOM_Y + 4);
+    printf("$$$$");
 }
 
 void DrawBird(int birdX) {
@@ -138,20 +139,20 @@ void DrawBird(int birdX) {
 }
 
 void DrawGameOver(const int score) {
-	system("cls");
-	SetColor(YELLOW);
-	int x = 16, y = 8;
-	GotoXY(x, y);
+    system("cls");
+    SetColor(YELLOW);
+    int x = 16, y = 8;
+    GotoXY(x, y);
 
-	printf("===================================");
-	GotoXY(x, y + 1);
-	printf("==========G A M E O V E R==========");
-	GotoXY(x, y + 2);
-	printf("===================================");
-	GotoXY(x, y + 5);
-	printf("SCORE : %d", score);
-	printf("\n\n\n\n\n\n\n\n\n");
-	system("pause");
+    printf("===================================");
+    GotoXY(x, y + 1);
+    printf("==========G A M E O V E R==========");
+    GotoXY(x, y + 2);
+    printf("===================================");
+    GotoXY(x, y + 5);
+    printf("SCORE : %d", score);
+    printf("\n\n\n\n\n\n\n\n\n");
+    system("pause");
 }
 
 int main() {
@@ -203,9 +204,16 @@ int main() {
 
             treeX -= 2;
             if (treeX <= 0) treeX = TREE_BOTTOM_X;
+            if (dinoY <= 3) isJumping = FALSE;
 
-            DrawDino(dinoY);
-            DrawTree(treeX);
+            int obstacleType = rand() % 2;
+            if (obstacleType == 0) {
+                DrawTree(treeX);
+                DrawDino(dinoY);
+            }
+            else {
+                DrawBird(treeX);
+            }
 
             curr = clock();
             if (((curr - start) / CLOCKS_PER_SEC) >= 1) {
