@@ -37,7 +37,7 @@ int IsCollision(const int treeX, const int dinoY);
 void DrawDino(int dinoY);
 void DrawTree(int treeX);
 void DrawGameOver(const int score);
-
+void DrawBird(int birdX);
 
 void SetConsoleView() {
 	system("mode con : cols=100 lines=25");
@@ -125,6 +125,18 @@ void DrawTree(int treeX) {
 	printf("$$$$");
 }
 
+void DrawBird(int birdX) {
+    SetColor(DARK_YELLOW);
+    GotoXY(birdX, TREE_BOTTOM_Y);
+    printf("  \\ \\\\");
+    GotoXY(birdX, TREE_BOTTOM_Y + 1);
+    printf(" (o><)");
+    GotoXY(birdX, TREE_BOTTOM_Y + 2);
+    printf("   )/");
+    GotoXY(birdX, TREE_BOTTOM_Y + 3);
+    printf(" ('')");
+}
+
 void DrawGameOver(const int score) {
 	system("cls");
 	SetColor(YELLOW);
@@ -145,6 +157,8 @@ void DrawGameOver(const int score) {
 int main() {
 	SetConsoleView();
 
+	srand((unsigned int)time(NULL));
+	
 	while (TRUE) {
 		int isJumping = FALSE;
 		int isBottom = TRUE;
@@ -174,10 +188,16 @@ int main() {
 			if (treeX <= 0) treeX = TREE_BOTTOM_X;
 
 			if (dinoY <= 3) isJumping = FALSE;
+			int obstacleType = rand() % 2;
 
-			DrawDino(dinoY);
-			DrawTree(treeX);
-
+			if (obstacleType == 0) {
+    				DrawDino(dinoY);
+   			        DrawTree(treeX);
+			}
+			else {
+    				DrawBird(treeX);
+			}
+			
 			curr = clock();
 			if (((curr - start) / CLOCKS_PER_SEC) >= 1) {
 				score++;
