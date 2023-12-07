@@ -142,7 +142,7 @@ void DrawTree(int treeX) {
 }
 
 void DrawBird(int birdX) {
-    SetColor(DARK_YELLOW);
+    SetColor(VIOLET);
     GotoXY(birdX, TREE_BOTTOM_Y);
     printf("  \\ \\\\");
     GotoXY(birdX, TREE_BOTTOM_Y + 1);
