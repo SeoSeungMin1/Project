@@ -103,12 +103,12 @@ void DrawDino(int dinoY) {
     printf("$$$   $$$$$     \n");
     printf(" $$  $$$$$$$$$$ \n");
     printf("$$\n");
-    SetColor(WHITE);
+    SetColor(RED);
     printf("$$$");
     SetColor(VIOLET);
     printf("$$$     \n");
     printf("  $$$");
-    SetColor(GREEN);
+    SetColor(RED);
     printf("$$$");
     SetColorVIOLET);
     printf("$    \n");
