@@ -92,7 +92,7 @@ void DrawCloud(int cloudX) {
 }
 
 void DrawDino(int dinoY) {
-    SetColor(VIOLET);
+    SetColor(WHITE);
     GotoXY(0, dinoY);
     static int legFlag = TRUE;
     printf("        $$$$$$$ \n");
@@ -105,12 +105,12 @@ void DrawDino(int dinoY) {
     printf("$$\n");
     SetColor(RED);
     printf("$$$");
-    SetColor(VIOLET);
+    SetColor(WHITE);
     printf("$$$     \n");
     printf("  $$$");
     SetColor(RED);
     printf("$$$");
-    SetColorVIOLET);
+    SetColor(WHITE);
     printf("$    \n");
     printf("    $$$$$$$$    \n");
     printf("     $$         ");
