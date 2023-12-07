@@ -88,12 +88,12 @@ void DrawDino(int dinoY) {
 	printf(" $$  $$$$$$$$$$ \n");
 	printf("$$\n");
 	SetColor(WHITE);
-	printf("원광대");
+	printf("$$$");
 	SetColor(RED);
 	printf("$$$     \n");
 	printf("  $$$");
 	SetColor(GREEN);
-	printf("컴소공");
+	printf("$$$");
 	SetColor(RED);
 	printf("$    \n");
 	printf("    $$$$$$$$    \n");
