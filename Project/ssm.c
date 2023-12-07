@@ -76,7 +76,7 @@ int IsCollision(const int treeX, const int dinoY) {
 }
 
 void DrawDino(int dinoY) {
-	SetColor(RED);
+	SetColor(BLUE);
 	GotoXY(0, dinoY);
 	static int legFlag = TRUE;
 	printf("        $$$$$$$ \n");
@@ -89,12 +89,12 @@ void DrawDino(int dinoY) {
 	printf("$$\n");
 	SetColor(WHITE);
 	printf("$$$");
-	SetColor(RED);
+	SetColor(BLUE);
 	printf("$$$     \n");
 	printf("  $$$");
 	SetColor(GREEN);
 	printf("$$$");
-	SetColor(RED);
+	SetColor(BLUE);
 	printf("$    \n");
 	printf("    $$$$$$$$    \n");
 	printf("     $$         ");
