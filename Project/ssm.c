@@ -41,7 +41,7 @@ void DrawGameOver(const int score);
 
 void SetConsoleView() {
 	system("mode con : cols=100 lines=25");
-	system("title Ã¢ÀÇ½Ç¹«ÇÁ·ÎÁ§Æ® ±¸±Û °ø·æ °ÔÀÓ [By. SSM]");
+	system("title êµ¬ê¸€ ê³µë£¡ ê²Œì„ [By. SSM]");
 	CursorView(FALSE);
 }
 
@@ -88,12 +88,12 @@ void DrawDino(int dinoY) {
 	printf(" $$  $$$$$$$$$$ \n");
 	printf("$$\n");
 	SetColor(WHITE);
-	printf("¿ø±¤´ë");
+	printf("ì›ê´‘ëŒ€");
 	SetColor(RED);
 	printf("$$$     \n");
 	printf("  $$$");
 	SetColor(GREEN);
-	printf("ÄÄ¼Ò°ø");
+	printf("ì»´ì†Œê³µ");
 	SetColor(RED);
 	printf("$    \n");
 	printf("    $$$$$$$$    \n");
@@ -191,7 +191,7 @@ int main() {
 			printf("Score : %d ", score);
 
 			GotoXY(2, 2);
-			printf("Á¡ÇÁ : Space Key");
+			printf("ì í”„ : Space Key");
 		}
 
 		DrawGameOver(score);
