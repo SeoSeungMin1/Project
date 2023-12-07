@@ -159,10 +159,14 @@ int main() {
 
     srand((unsigned int)time(NULL)); 
 
+    const int jumpHeight = 5; 
+    int jumpVelocity = jumpHeight;
+    int jumpTime = 0; 
+
     while (TRUE) {
         int isJumping = FALSE;
         int isBottom = TRUE;
-        const int gravity = 3;
+        const int gravity = 1; 
 
         int dinoY = DINO_BOTTOM_Y;
         int treeX = TREE_BOTTOM_X;
@@ -176,37 +180,32 @@ int main() {
             if (GetKeyDown() == ' ' && isBottom) {
                 isJumping = TRUE;
                 isBottom = FALSE;
+                jumpTime = 0; 
+                jumpVelocity = jumpHeight;
             }
-            if (isJumping) dinoY -= gravity;
-            else dinoY += gravity;
 
-            if (dinoY >= DINO_BOTTOM_Y) {
-                dinoY = DINO_BOTTOM_Y;
-                isBottom = TRUE;
+            if (isJumping && jumpTime < jumpHeight) {
+                dinoY -= jumpVelocity;
+                jumpTime++;
+                jumpVelocity -= gravity;
             }
+            else {
+                isJumping = FALSE;
+                if (dinoY < DINO_BOTTOM_Y) {
+                    dinoY += gravity;
+                }
+                else {
+                    dinoY = DINO_BOTTOM_Y;
+                    isBottom = TRUE;
+                    jumpVelocity = jumpHeight;
+                }
+            }
+
             treeX -= 2;
             if (treeX <= 0) treeX = TREE_BOTTOM_X;
 
-            if (dinoY <= 3) isJumping = FALSE;
-
-            system("cls");
-
-            SetColor(WHITE);
-            GotoXY(22, 0);
-            printf("Score : %d ", score);
-            GotoXY(2, 2);
-            printf("Jump: Space Key");
-
             DrawDino(dinoY);
-
-            int obstacleType = rand() % 2; 
-
-            if (obstacleType == 0) {
-                DrawTree(treeX);
-            }
-            else {
-                DrawBird(treeX);
-            }
+            DrawTree(treeX);
 
             curr = clock();
             if (((curr - start) / CLOCKS_PER_SEC) >= 1) {
@@ -214,11 +213,19 @@ int main() {
                 start = clock();
             }
 
-            Sleep(30);
+            Sleep(1); 
+            system("cls");
+
+            SetColor(WHITE);
+            GotoXY(22, 0);
+            printf("Score : %d ", score);
+
+            GotoXY(2, 2);
+            printf("Jump: Space Key");
         }
-	    
+
         DrawGameOver(score);
     }
-	
+
     return FALSE;
 }
