@@ -6,8 +6,8 @@
 #define DINO_BOTTOM_Y 12
 #define TREE_BOTTOM_Y 20
 #define TREE_BOTTOM_X 45
-#define CLOUD_BOTTOM_Y 15
-#define CLOUD_BOTTOM_X 45
+#define CLOUD_BOTTOM_Y 20
+#define CLOUD_BOTTOM_X 60
 #define FALSE 0
 #define TRUE 1
 
