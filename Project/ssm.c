@@ -134,7 +134,7 @@ void DrawTree(int treeX) {
     printf("$$$$");
     GotoXY(treeX, TREE_BOTTOM_Y + 2);
     printf("$$$$");
-    SetColor(DARK_YELLOW);
+    SetColor(GRAY);
     GotoXY(treeX, TREE_BOTTOM_Y + 3);
     printf("$$$$");
     GotoXY(treeX, TREE_BOTTOM_Y + 4);
