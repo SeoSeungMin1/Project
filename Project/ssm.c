@@ -155,7 +155,7 @@ void DrawBird(int birdX) {
 
 void DrawGameOver(const int score) {
     system("cls");
-    SetColor(YELLOW);
+    SetColor(GREEN);
     int x = 16, y = 8;
     GotoXY(x, y);
 
