@@ -155,66 +155,70 @@ void DrawGameOver(const int score) {
 }
 
 int main() {
-	SetConsoleView();
+    SetConsoleView();
 
-	srand((unsigned int)time(NULL));
+    srand((unsigned int)time(NULL)); 
+
+    while (TRUE) {
+        int isJumping = FALSE;
+        int isBottom = TRUE;
+        const int gravity = 3;
+
+        int dinoY = DINO_BOTTOM_Y;
+        int treeX = TREE_BOTTOM_X;
+
+        int score = 0;
+        clock_t start, curr;
+        start = clock();
+
+        while (TRUE) {
+            if (IsCollision(treeX, dinoY)) break;
+            if (GetKeyDown() == ' ' && isBottom) {
+                isJumping = TRUE;
+                isBottom = FALSE;
+            }
+            if (isJumping) dinoY -= gravity;
+            else dinoY += gravity;
+
+            if (dinoY >= DINO_BOTTOM_Y) {
+                dinoY = DINO_BOTTOM_Y;
+                isBottom = TRUE;
+            }
+            treeX -= 2;
+            if (treeX <= 0) treeX = TREE_BOTTOM_X;
+
+            if (dinoY <= 3) isJumping = FALSE;
+
+            system("cls");
+
+            SetColor(WHITE);
+            GotoXY(22, 0);
+            printf("Score : %d ", score);
+            GotoXY(2, 2);
+            printf("Jump: Space Key");
+
+            DrawDino(dinoY);
+
+            int obstacleType = rand() % 2; 
+
+            if (obstacleType == 0) {
+                DrawTree(treeX);
+            }
+            else {
+                DrawBird(treeX);
+            }
+
+            curr = clock();
+            if (((curr - start) / CLOCKS_PER_SEC) >= 1) {
+                score++;
+                start = clock();
+            }
+
+            Sleep(30);
+        }
+	    
+        DrawGameOver(score);
+    }
 	
-	while (TRUE) {
-		int isJumping = FALSE;
-		int isBottom = TRUE;
-		const int gravity = 3;
-
-		int dinoY = DINO_BOTTOM_Y;
-		int treeX = TREE_BOTTOM_X;
-
-		int score = 0;
-		clock_t start, curr;
-		start = clock();
-
-		while (TRUE) {
-			if (IsCollision(treeX, dinoY)) break;
-			if (GetKeyDown() == ' ' && isBottom) {
-				isJumping = TRUE;
-				isBottom = FALSE;
-			}
-			if (isJumping) dinoY -= gravity;
-			else dinoY += gravity;
-
-			if (dinoY >= DINO_BOTTOM_Y) {
-				dinoY = DINO_BOTTOM_Y;
-				isBottom = TRUE;
-			}
-			treeX -= 2;
-			if (treeX <= 0) treeX = TREE_BOTTOM_X;
-
-			if (dinoY <= 3) isJumping = FALSE;
-			int obstacleType = rand() % 2;
-
-			if (obstacleType == 0) {
-    				DrawDino(dinoY);
-   			        DrawTree(treeX);
-			}
-			else {
-    				DrawBird(treeX);
-			}
-			
-			curr = clock();
-			if (((curr - start) / CLOCKS_PER_SEC) >= 1) {
-				score++;
-				start = clock();
-			}
-			Sleep(30);
-			system("cls");
-
-			SetColor(WHITE);
-			GotoXY(22, 0);
-			printf("Score : %d ", score);
-
-			GotoXY(2, 2);
-			printf("점프 : Space Key");
-		}
-
-		DrawGameOver(score);
-	}
-	return FALSE;
+    return FALSE;
 }
