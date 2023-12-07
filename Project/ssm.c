@@ -6,6 +6,8 @@
 #define DINO_BOTTOM_Y 12
 #define TREE_BOTTOM_Y 20
 #define TREE_BOTTOM_X 45
+#define CLOUD_BOTTOM_Y 15
+#define CLOUD_BOTTOM_X 45
 #define FALSE 0
 #define TRUE 1
 
@@ -38,6 +40,7 @@ void DrawDino(int dinoY);
 void DrawTree(int treeX);
 void DrawGameOver(const int score);
 void DrawBird(int birdX);
+void DrawCloud(int cloudX);
 
 
 void SetConsoleView() {
@@ -74,6 +77,18 @@ int IsCollision(const int treeX, const int dinoY) {
     if (treeX <= 8 && treeX >= 4 && dinoY > 8) return TRUE;
 
     return FALSE;
+}
+
+void DrawCloud(int cloudX) {
+    SetColor(DARK_GRAY);
+    GotoXY(cloudX, CLOUD_BOTTOM_Y);
+    printf("  _  ");
+    GotoXY(cloudX, CLOUD_BOTTOM_Y + 1);
+    printf(" ( ` ");
+    GotoXY(cloudX, CLOUD_BOTTOM_Y + 2);
+    printf("  ` )");
+    GotoXY(cloudX, CLOUD_BOTTOM_Y + 3);
+    printf("  -  ");
 }
 
 void DrawDino(int dinoY) {
@@ -158,30 +173,32 @@ void DrawGameOver(const int score) {
 int main() {
     SetConsoleView();
 
-    srand((unsigned int)time(NULL)); 
+    srand((unsigned int)time(NULL));
 
-    const int jumpHeight = 5; 
+    const int jumpHeight = 5;
     int jumpVelocity = jumpHeight;
-    int jumpTime = 0; 
+    int jumpTime = 0;
 
     while (TRUE) {
         int isJumping = FALSE;
         int isBottom = TRUE;
-        const int gravity = 1; 
+        const int gravity = 1;
 
         int dinoY = DINO_BOTTOM_Y;
         int treeX = TREE_BOTTOM_X;
+        int cloudX = CLOUD_BOTTOM_X;
 
         int score = 0;
         clock_t start, curr;
         start = clock();
 
         while (TRUE) {
-            if (IsCollision(treeX, dinoY)) break;
+            if (IsCollision(treeX, dinoY) || IsCollision(cloudX, dinoY)) break;
+
             if (GetKeyDown() == ' ' && isBottom) {
                 isJumping = TRUE;
                 isBottom = FALSE;
-                jumpTime = 0; 
+                jumpTime = 0;
                 jumpVelocity = jumpHeight;
             }
 
@@ -204,15 +221,23 @@ int main() {
 
             treeX -= 2;
             if (treeX <= 0) treeX = TREE_BOTTOM_X;
+
+            cloudX -= 1;
+            if (cloudX <= 0) cloudX = CLOUD_BOTTOM_X;
+
             if (dinoY <= 3) isJumping = FALSE;
 
-            int obstacleType = rand() % 2;
+            int obstacleType = rand() % 3;
             if (obstacleType == 0) {
                 DrawTree(treeX);
                 DrawDino(dinoY);
             }
-            else {
+            else if (obstacleType == 1) {
                 DrawBird(treeX);
+            }
+            else {
+                DrawCloud(cloudX);
+                DrawDino(dinoY);
             }
 
             curr = clock();
@@ -221,7 +246,7 @@ int main() {
                 start = clock();
             }
 
-            Sleep(1); 
+            Sleep(30);
             system("cls");
 
             SetColor(WHITE);
