@@ -127,7 +127,7 @@ void DrawDino(int dinoY) {
 }
 
 void DrawTree(int treeX) {
-    SetColor(GREEN);
+    SetColor(SKYBLUE);
     GotoXY(treeX, TREE_BOTTOM_Y);
     printf("$$$$");
     GotoXY(treeX, TREE_BOTTOM_Y + 1);
